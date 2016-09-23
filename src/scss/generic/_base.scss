@@ -1,4 +1,26 @@
+$button-color: #16bffd;
+
 body {
   font-size: 16px;
   line-height: 1.5;
+  padding: 2rem;
+}
+
+button {
+  position: relative;
+  color: #fff;
+  background: $button-color;
+  border: 0;
+  padding: .5rem 1rem;
+  outline: 0;
+  z-index: 100;
+  cursor: default;
+
+  &:hover {
+    background: lighten($button-color, 10%);
+  }
+
+  &:active {
+    background: darken($button-color, 10%);
+  }
 }
