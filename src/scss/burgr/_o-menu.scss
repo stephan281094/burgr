@@ -63,8 +63,13 @@ $transition-speed: .35s;
     pointer-events: none;
     transition: $transition-speed background-color ease-in-out;
     background-color: transparent;
+    display: none;
 
     &--visible {
+      display: block;
+    }
+
+    &--open {
       opacity: 1;
       pointer-events: initial;
       background-color: rgba(0, 0, 0, 0.25);

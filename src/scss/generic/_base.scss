@@ -1,4 +1,28 @@
+$button-color: #16bffd;
+
 body {
   font-size: 16px;
   line-height: 1.5;
+  padding: 2rem;
+}
+
+button {
+  color: #fff;
+  background: $button-color;
+  border: 0;
+  padding: .5rem 1rem;
+  outline: 0;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+
+  &:hover {
+    background: lighten($button-color, 10%);
+  }
+
+  &:active {
+    background: darken($button-color, 10%);
+  }
 }
