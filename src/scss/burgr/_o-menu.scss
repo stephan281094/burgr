@@ -1,11 +1,28 @@
 $transition-speed: .25s;
 
 .o-burgr {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: transparent;
+
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .25);
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   &__menu {
     left: 0;
     top: 0;
     max-width: 350px;
-    width: 80vw;
+    width: 80%;
     height: 100%;
     background-color: #fff;
     display: block;
@@ -33,37 +50,11 @@ $transition-speed: .25s;
   }
 
   &__container {
-    position: fixed;
+    position: absolute;
     top: 0;
-    left: -80vw;
-    width: 100vw;
-    height: 100%;
-    background-color: #00c;
-  }
-
-  &__overlay {
-    position: fixed;
-    left: 0;
-    top: 0;
+    left: -80%;
     width: 100%;
     height: 100%;
-    // pointer-events: none;
-    transition: $transition-speed background-color ease-in-out;
-    background-color: transparent;
-    display: none;
-
-    &--visible {
-      display: block;
-    }
-
-    &--open {
-      opacity: 1;
-      pointer-events: initial;
-      background-color: rgba(0, 0, 0, 0.25);
-
-      .o-burgr__container {
-        left: 0;
-      }
-    }
+    // background-color: #00c;
   }
 }
