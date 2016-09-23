@@ -29,6 +29,7 @@ window.onload = function () {
     }
 
     container.style.left = newLeft + 'px'
+    overlay.style.opacity = 1 - (newLeft / menuWidth * -1)
   }
 
   function endDrag (evt) {
@@ -36,10 +37,10 @@ window.onload = function () {
 
     if (parseFloat(container.style.left, 10) > border) {
       animateContainerLeft(parseFloat(container.style.left, 10), 0)
-      animateLayoutOpacity(0, 1)
+      animateLayoutOpacity(parseFloat(overlay.style.opacity, 10), 1)
     } else {
       animateContainerLeft(parseFloat(container.style.left, 10), -menuWidth)
-      animateLayoutOpacity(1, 0)
+      animateLayoutOpacity(parseFloat(overlay.style.opacity, 10), 0)
     }
   }
 
