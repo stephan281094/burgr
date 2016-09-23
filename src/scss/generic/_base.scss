@@ -3,7 +3,21 @@ $button-color: #16bffd;
 body {
   font-size: 16px;
   line-height: 1.5;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+p {
+  margin-bottom: 1em;
+  word-break: break-all;
 }
 
 button {
@@ -16,7 +30,8 @@ button {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-
+  text-transform: uppercase;
+  font-size: .75em;
 
   &:hover {
     background: lighten($button-color, 10%);
@@ -24,5 +39,11 @@ button {
 
   &:active {
     background: darken($button-color, 10%);
+  }
+}
+
+@media (min-width: 801px) {
+  body {
+    padding: 3rem;
   }
 }
