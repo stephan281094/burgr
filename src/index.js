@@ -10,7 +10,7 @@ window.onload = function () {
   // Touch support
   var containerWidth = container.getBoundingClientRect().width
   var menuWidth = menu.getBoundingClientRect().width
-  var containerX  = container.offsetLeft
+  var containerX = getContainerTranslation(container)
 
   container.addEventListener('touchstart', startDrag)
   container.addEventListener('touchmove', drag)
@@ -32,7 +32,7 @@ window.onload = function () {
   }
 
   function startDrag (evt) {
-    containerX = evt.changedTouches[0].pageX - container.offsetLeft
+    containerX = evt.changedTouches[0].pageX - getContainerTranslation(container)
   }
 
   function drag (evt) {
@@ -45,20 +45,21 @@ window.onload = function () {
       newLeft = -menuWidth
     }
 
-    container.style.left = newLeft + 'px'
+    container.style.transform = 'translate3d(' + newLeft + 'px, 0, 0)'
     overlay.style.opacity = 1 - (newLeft / menuWidth * -1)
   }
 
   function endDrag (evt) {
     var border = -((1 - 0.5) * containerWidth)
+    var x = getContainerTranslation(container)
 
     // If user dragged beyond 'border'
-    if (parseFloat(container.style.left, 10) > border) {
-      animateContainerLeft(parseFloat(container.style.left, 10), 0)
+    if (parseFloat(x, 10) > border) {
+      animateContainerLeft(parseFloat(x, 10), 0)
       animateLayoutOpacity(parseFloat(overlay.style.opacity, 10), 1)
       isOpen = true
     } else {
-      animateContainerLeft(parseFloat(container.style.left, 10), -menuWidth)
+      animateContainerLeft(parseFloat(x, 10), -menuWidth)
       animateLayoutOpacity(parseFloat(overlay.style.opacity, 10), 0)
       isOpen = false
     }
@@ -66,7 +67,8 @@ window.onload = function () {
 
   function click (evt) {
     if (isOpen) {
-      animateContainerLeft(parseFloat(container.style.left, 10), -menuWidth, 350)
+      var x = getContainerTranslation(container)
+      animateContainerLeft(parseFloat(x, 10), -menuWidth, 350)
       animateLayoutOpacity(parseFloat(overlay.style.opacity, 10), 0, 350)
 
       isOpen = false
@@ -81,7 +83,7 @@ window.onload = function () {
     var timer = setInterval(function () {
       var time = new Date().getTime() - start
       var left = easeInOutQuart(time, from, to - from, duration)
-      container.style.left = left + 'px'
+      container.style.transform = 'translate3d(' + left + 'px, 0, 0)'
       if (time >= duration) clearInterval(timer)
     }, 1000 / 60)
   }
@@ -98,8 +100,19 @@ window.onload = function () {
     }, 1000 / 60)
   }
 
-  function easeInOutQuart(t, b, c, d) {
+  function easeInOutQuart (t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
     return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+  }
+
+  // Helper functions
+  function getContainerTranslation (c) {
+    var s = getComputedStyle(c, null)
+    var t = s.getPropertyValue('transform')
+    var v = t.split('(')[1]
+        v = t.split(')')[0]
+        v = t.split(',')
+
+    return v[4]
   }
 }
