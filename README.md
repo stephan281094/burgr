@@ -10,10 +10,10 @@ A simple touch-friendly hamburger menu.
 * Run `npm start`.
 * Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-## Building
+## Other scripts
+* Run `npm run lint` to lint your code.
 * Run `npm run build` to build a javascript file you can include on your page.
-
-*note*: This is currently not optimized. Use with care.
+  **note**: This is currently not optimized. Use with care.
 
 ## License
 MIT
