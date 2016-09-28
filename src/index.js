@@ -25,12 +25,6 @@ window.onload = function () {
     isOpen = true
   }
 
-  function close () {
-    animateContainerLeft(0, -menuWidth, 350)
-    animateLayoutOpacity(1, 0)
-    isOpen = false
-  }
-
   function startDrag (evt) {
     containerX = evt.changedTouches[0].pageX - getContainerTranslation(container)
   }
@@ -76,9 +70,9 @@ window.onload = function () {
   }
 
   // Animations
-  function animateContainerLeft (from, to, duration) {
-    var duration = duration || 250
-    var start    = new Date().getTime()
+  function animateContainerLeft (from, to, dur) {
+    var duration = dur || 250
+    var start = new Date().getTime()
 
     var timer = setInterval(function () {
       var time = new Date().getTime() - start
@@ -88,30 +82,30 @@ window.onload = function () {
     }, 1000 / 60)
   }
 
-  function animateLayoutOpacity (from, to, duration) {
-    var duration = duration || 250
-    var start    = new Date().getTime()
+  function animateLayoutOpacity (from, to, dur) {
+    var duration = dur || 250
+    var start = new Date().getTime()
 
     var timer = setInterval(function () {
       var time = new Date().getTime() - start
       var opacity = easeInOutQuart(time, from, to - from, duration)
-      overlay.style.opacity = opacity;
+      overlay.style.opacity = opacity
       if (time >= duration) clearInterval(timer)
     }, 1000 / 60)
   }
 
   function easeInOutQuart (t, b, c, d) {
-    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
-    return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b
+    return -c / 2 * ((t -= 2) * t * t * t - 2) + b
   }
 
   // Helper functions
   function getContainerTranslation (c) {
-    var s = getComputedStyle(c, null)
+    var s = window.getComputedStyle(c, null)
     var t = s.getPropertyValue('transform')
     var v = t.split('(')[1]
-        v = t.split(')')[0]
-        v = t.split(',')
+    v = t.split(')')[0]
+    v = t.split(',')
 
     return v[4]
   }

@@ -1,5 +1,4 @@
 var path = require('path')
-var webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -14,7 +13,7 @@ module.exports = {
       { test: /\.(svg|jpg|png|ttf|woff2?|eot)(\?.+)?$/, loader: 'file' }
     ]
   },
-  postcss: function (webpack) {
+  postcss: function () {
     return [
       require('autoprefixer')
     ]
